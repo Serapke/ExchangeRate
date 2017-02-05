@@ -1,14 +1,39 @@
 # ExchangeRate
-Short description and motivation.
+
+Foreign currency exchange library.
+
+Example Ruby on Rails application repository:
+
+https://github.com/Serapke/ExchangeRateApp
 
 ## Usage
-How to use my plugin.
+
+Create new rate instances:
+```ruby
+ExchangeRate::Rate.instance.set(currency, rate, date)
+```
+
+Get rates from database:
+```ruby
+ExchangeRate::Rate.instance.get(currency, date)
+```
+
+Convert currency using:
+```ruby
+ExchangeRate::Rate.instance.at(date, from, to)
+```
+
+To access ActiveRecord class of Rate use class:
+```ruby
+ExchangeRate::Record
+```
 
 ## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'exchange_rate'
+gem 'exchange_rate',
+    :git => 'https://github.com/Serapke/ExchangeRate.git' 
 ```
 
 And then execute:
@@ -16,10 +41,20 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
+After that:
 ```bash
-$ gem install exchange_rate
+$ rails g exchange_rate:install
 ```
+
+This will create a new migration `create_rates`
+
+Do a migration:
+
+```bash
+$ rails db:migrate
+```
+
+And you are good to go!
 
 ## Contributing
 Contribution directions go here.
